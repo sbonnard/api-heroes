@@ -7,6 +7,7 @@ Chaque personnage possède :
  - un niveau d’expérience, défini entre 1 et 10 ;
  - une force d’arme, définie entre 1 et 10 ;
  - une puissance de bouclier, définie entre 1 et 10.
+
 La bataille se déroule en tours successifs qui sont des combats.
 La bataille se termine uniquement lorsque qu’il n’y a plus qu’un seul personnage vivant.
 Lors d’un combat, l’un des personnages tirés au hasard attaque un autre personnage tiré au
