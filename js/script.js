@@ -71,17 +71,32 @@ function getDefenseScore(defender) {
     return getRandomValue(defender.shield) + defender.xp;
 }
 
+/**
+ * get 2 random challengers for a fight.
+ * @param {array} charactersList The array you want the character's to be from.
+ * @returns {array} First index of the array will draw the attacker and the second one will draw the defender.
+ */
+function getChallengers(charactersList) {
+    let challengers = [];
+    while (challengers.length < 2) {
+        challengers.push(getRandomArrayValue(charactersList));
+        if (challengers[0] === challengers[1]) {
+            challengers.pop()
+        }
+    }
+    return challengers;
+}
+
+
+let challengers = getChallengers(characters);
 console.table(characters);
 
-const attacker = getRandomArrayValue(characters);
-const defender= getRandomArrayValue(characters);
-
 console.log(
-    attacker,
-    getAttackScore(attacker)
+    challengers[0],
+    getAttackScore(challengers[0])
 );
 
 console.log(
-    defender,
-    getDefenseScore(defender)
+    challengers[1],
+    getDefenseScore(challengers[1])
 );
