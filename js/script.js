@@ -11,7 +11,7 @@ function getRandomValue(max) {
 
 /**
  * Gets a random value from an array
- * @param {array} array of datas 
+ * @param {array} array - Array of datas 
  * @returns {*} - a random value
  */
 function getRandomArrayValue(array) {
@@ -62,12 +62,26 @@ function getAttackScore(attacker) {
     return getRandomValue(attacker.weapon) + attacker.xp;
 }
 
+/**
+ * Get random defense score from character stats
+ * @param {object} defender - An object representing a character
+ * @returns {number} - Random defense score
+ */
+function getDefenseScore(defender) {
+    return getRandomValue(defender.shield) + defender.xp;
+}
+
 console.table(characters);
 
 const attacker = getRandomArrayValue(characters);
-// const defender;
+const defender= getRandomArrayValue(characters);
 
 console.log(
     attacker,
     getAttackScore(attacker)
+);
+
+console.log(
+    defender,
+    getDefenseScore(defender)
 );
