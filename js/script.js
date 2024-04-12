@@ -152,4 +152,19 @@ function startBattleRoyalRec(characterArray) {
     return startBattleRoyalRec(burnTheDead(characterArray));
 }
 
-console.table(startBattleRoyalRec(characters));
+function startBattleRoyalInterval(characterArray) {
+
+    const timer = setInterval(() => {
+        const challengers = getChallengers(characterArray);
+        console.log(fight(challengers));
+        characterArray = burnTheDead(characterArray);
+
+        if (characterArray.length === 1) {
+            clearInterval(timer);
+            console.table(characterArray[0]);
+        }
+    }, 1000);
+}
+
+startBattleRoyalInterval(characters);
+// console.table(startBattleRoyalInterval(characters));
