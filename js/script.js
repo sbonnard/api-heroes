@@ -20,36 +20,32 @@ function getRandomArrayValue(array) {
 
 let characters = [
     {
-        name: 'Godzilla',
+        name: 'Chun-li',
         life: 50,
-        xp: 5,
+        xp: 9,
         weapon: 9,
-        shield: 4,
-        alive: true
+        shield: 4
     },
     {
-        name: 'Kong',
+        name: 'Ryu',
         life: 50,
         xp: 7,
         weapon: 8,
-        shield: 7,
-        alive: true
+        shield: 7
     },
     {
-        name: 'Hulk',
+        name: 'Ken',
         life: 50,
-        xp: 4,
-        weapon: 3,
-        shield: 2,
-        alive: true
+        xp: 7,
+        weapon: 7,
+        shield: 7
     },
     {
-        name: 'Aquaman',
+        name: 'Zangief',
         life: 50,
-        xp: 4,
-        weapon: 3,
-        shield: 1,
-        alive: true
+        xp: 5,
+        weapon: 5,
+        shield: 1
     }
 ];
 
@@ -144,19 +140,18 @@ function burnTheDead(charactersArray){
    return charactersArray.filter(isAlive);
 }
 
-
+/**
+ * Fight until only 1 remains
+ * @param {array} characterArray -The array with all our characters
+ * @return {object} -The winner's object
+ */
 function startBattleRoyal(characterArray){
     while(characterArray.length > 1){
         const challengers = getChallengers(characterArray);
         fight(challengers);
         characterArray = burnTheDead(characterArray);
     }
+    return characterArray[0];
 }
 
-let challengers = getChallengers(characters);
-console.table(challengers);
-let fightRound = fight(challengers);
-console.table(fightRound);
-
-characters = burnTheDead(characters);
-console.table(characters);
+console.table(startBattleRoyal(characters));
