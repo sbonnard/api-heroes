@@ -45,7 +45,7 @@ let characters = [
         life: 50,
         xp: 5,
         weapon: 5,
-        shield: 1
+        shield: 2
     }
 ];
 
@@ -87,38 +87,29 @@ function getChallengers(charactersList) {
 /**
  * fight between two characters and define the winner and the loser.
  * @param {array} challengers the first element in the array is the attacker and the second is the defender. they are objects. 
- * @returns {object}
+ * @returns {string} A text to explain the fight.
  */
 function fight(challengers) {
     const attacker = challengers[0];
     const defender = challengers[1];
 
-    let winner;
-    let loser;
+    let txt = '';
+
     const attackPoints = getAttackScore(attacker);
-    const defensePoints = getDefenseScore(defender);
-    if (attackPoints > defensePoints) {
-        winner = attacker;
-        loser = defender;
+    if (attackPoints > getDefenseScore(defender)) {
         defender.life -= attackPoints;
 
-        console.log(`${attacker.name} attaque ${defender.name} et a gagné le combat en lui infligeant ${attackPoints} points de dégats.`);
+        txt += `${attacker.name} attaque ${defender.name} et a gagné le combat en lui infligeant ${attackPoints} points de dégats.`;
+
+        if (!isAlive(defender)) {
+            txt += ` ${defender.name} est mort 💀`
+        }
     }
     else {
-        loser = attacker;
-        winner = defender;
-    
-        console.log(`${defender.name} a contré l'attaque de ${attacker.name}.`);
+        txt += `${defender.name} a contré l'attaque de ${attacker.name}.`;
     }
 
-    return {
-        "winner": winner.name,
-        "loser": loser.name,
-        attackPoints,
-        defensePoints,
-        "attacker life": attacker.life,
-        "defender life": defender.life,
-    };
+    return txt;
 }
 
 /**
@@ -126,7 +117,7 @@ function fight(challengers) {
  * @param {object} character -The character's object
  * @returns {boolean} -True if alive, false if dead
  */
-function isAlive(character){
+function isAlive(character) {
     return character.life > 0;
 }
 
@@ -136,8 +127,8 @@ function isAlive(character){
  * @param {array} charactersArray -The characters array
  * @returns {array} -The new array without characters out of hp
  */
-function burnTheDead(charactersArray){
-   return charactersArray.filter(isAlive);
+function burnTheDead(charactersArray) {
+    return charactersArray.filter(isAlive);
 }
 
 /**
@@ -145,13 +136,20 @@ function burnTheDead(charactersArray){
  * @param {array} characterArray -The array with all our characters
  * @return {object} -The winner's object
  */
-function startBattleRoyal(characterArray){
-    while(characterArray.length > 1){
+function startBattleRoyal(characterArray) {
+    while (characterArray.length > 1) {
         const challengers = getChallengers(characterArray);
-        fight(challengers);
+        console.log(fight(challengers));
         characterArray = burnTheDead(characterArray);
     }
     return characterArray[0];
 }
 
-console.table(startBattleRoyal(characters));
+function startBattleRoyalRec(characterArray) {
+    if (characterArray.length === 1) return characterArray[0];
+
+    console.log(fight(getChallengers(characterArray)));
+    return startBattleRoyalRec(burnTheDead(characterArray));
+}
+
+console.table(startBattleRoyalRec(characters));
