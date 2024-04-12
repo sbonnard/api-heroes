@@ -96,6 +96,7 @@ function getChallengers(charactersList) {
 function fight(challengers) {
     const attacker = challengers[0];
     const defender = challengers[1];
+
     let winner;
     let loser;
     const attackPoints = getAttackScore(attacker);
@@ -104,22 +105,24 @@ function fight(challengers) {
         winner = attacker;
         loser = defender;
         defender.life -= attackPoints;
+
+        console.log(`${attacker.name} attaque ${defender.name} et a gagné le combat en lui infligeant ${attackPoints} points de dégats.`);
     }
     else {
         loser = attacker;
         winner = defender;
-
+    
+        console.log(`${defender.name} a contré l'attaque de ${attacker.name}.`);
     }
 
     return {
         "winner": winner.name,
         "loser": loser.name,
-        "attack points": attackPoints,
-        "defend points": defensePoints,
+        attackPoints,
+        defensePoints,
         "attacker life": attacker.life,
         "defender life": defender.life,
-
-    }
+    };
 
 }
 
