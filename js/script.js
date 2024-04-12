@@ -35,22 +35,22 @@ const characters = [
         shield: 7,
         alive: true
     },
-    // {
-    //     name: 'Hulk',
-    //     life: 50,
-    //     xp: 4,
-    //     weapon: 3,
-    //     shield: 2,
-    //     alive: true
-    // },
-    // {
-    //     name: 'Aquaman',
-    //     life: 50,
-    //     xp: 4,
-    //     weapon: 3,
-    //     shield: 1,
-    //     alive: true
-    // }
+    {
+        name: 'Hulk',
+        life: 50,
+        xp: 4,
+        weapon: 3,
+        shield: 2,
+        alive: true
+    },
+    {
+        name: 'Aquaman',
+        life: 50,
+        xp: 4,
+        weapon: 3,
+        shield: 1,
+        alive: true
+    }
 ];
 
 /**
@@ -88,15 +88,44 @@ function getChallengers(charactersList) {
 }
 
 
-let challengers = getChallengers(characters);
+/**
+ * fight between two characters and define the winner and the loser.
+ * @param {array} challengers the first element in the array is the attacker and the second is the defender. they are objects. 
+ * @returns {object}
+ */
+function fight(challengers) {
+    const attacker = challengers[0];
+    const defender = challengers[1];
+    let winner;
+    let loser;
+    const attackPoints = getAttackScore(attacker);
+    const defensePoints = getDefenseScore(defender);
+    if (attackPoints > defensePoints) {
+        winner = attacker;
+        loser = defender;
+        defender.life -= attackPoints;
+    }
+    else {
+        loser = attacker;
+        winner = defender;
+
+    }
+
+    return {
+        "winner": winner.name,
+        "loser": loser.name,
+        "attack points": attackPoints,
+        "defend points": defensePoints,
+        "attacker life": attacker.life,
+        "defender life": defender.life,
+
+    }
+
+}
+
 console.table(characters);
 
-console.log(
-    challengers[0],
-    getAttackScore(challengers[0])
-);
-
-console.log(
-    challengers[1],
-    getDefenseScore(challengers[1])
-);
+let challengers = getChallengers(characters);
+console.table(challengers);
+let fightRound = fight(challengers);
+console.table(fightRound);
