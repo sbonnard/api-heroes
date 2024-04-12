@@ -18,7 +18,7 @@ function getRandomArrayValue(array) {
     return array[getRandomValue(array.length - 1)];
 }
 
-const characters = [
+let characters = [
     {
         name: 'Godzilla',
         life: 50,
@@ -123,12 +123,40 @@ function fight(challengers) {
         "attacker life": attacker.life,
         "defender life": defender.life,
     };
-
 }
 
-console.table(characters);
+/**
+ * Test if a character is alive and return true if he is
+ * @param {object} character -The character's object
+ * @returns {boolean} -True if alive, false if dead
+ */
+function isAlive(character){
+    return character.life > 0;
+}
+
+
+/**
+ * Delete a character from is array if he is out of hp
+ * @param {array} charactersArray -The characters array
+ * @returns {array} -The new array without characters out of hp
+ */
+function burnTheDead(charactersArray){
+   return charactersArray.filter(isAlive);
+}
+
+
+function startBattleRoyal(characterArray){
+    while(characterArray.length > 1){
+        const challengers = getChallengers(characterArray);
+        fight(challengers);
+        characterArray = burnTheDead(characterArray);
+    }
+}
 
 let challengers = getChallengers(characters);
 console.table(challengers);
 let fightRound = fight(challengers);
 console.table(fightRound);
+
+characters = burnTheDead(characters);
+console.table(characters);
