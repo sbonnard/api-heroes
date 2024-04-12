@@ -35,22 +35,22 @@ const characters = [
         shield: 7,
         alive: true
     },
-    {
-        name: 'Hulk',
-        life: 50,
-        xp: 4,
-        weapon: 3,
-        shield: 2,
-        alive: true
-    },
-    {
-        name: 'Aquaman',
-        life: 50,
-        xp: 4,
-        weapon: 3,
-        shield: 1,
-        alive: true
-    }
+    // {
+    //     name: 'Hulk',
+    //     life: 50,
+    //     xp: 4,
+    //     weapon: 3,
+    //     shield: 2,
+    //     alive: true
+    // },
+    // {
+    //     name: 'Aquaman',
+    //     life: 50,
+    //     xp: 4,
+    //     weapon: 3,
+    //     shield: 1,
+    //     alive: true
+    // }
 ];
 
 /**
@@ -72,16 +72,16 @@ function getDefenseScore(defender) {
 }
 
 /**
- * get 2 random challengers for a fight.
+ * Get 2 different and random challengers for a fight.
  * @param {array} charactersList The array you want the character's to be from.
  * @returns {array} First index of the array will draw the attacker and the second one will draw the defender.
  */
 function getChallengers(charactersList) {
     let challengers = [];
     while (challengers.length < 2) {
-        challengers.push(getRandomArrayValue(charactersList));
-        if (challengers[0] === challengers[1]) {
-            challengers.pop()
+        const c = getRandomArrayValue(charactersList);
+        if (!challengers.includes(c)) {
+            challengers.push(c);
         }
     }
     return challengers;
