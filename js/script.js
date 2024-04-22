@@ -19,27 +19,34 @@ function getRandomArrayValue(array) {
 }
 
 
-const ul = document.getElementById("heros-lst");
+const ul = document.getElementById("heroes-lst");
+const template = document.getElementById('hero-template');
 
-async function waitingForResponse () {
+async function waitingForResponse() {
     try {
 
         const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json");
-    
+
         const allHeroes = await response.json()
         console.log(getChallengers(allHeroes));
 
         getChallengers(allHeroes).forEach(hero => {
-            const nameHero = document.createElement('li');
-            nameHero.innerHTML = hero.name;
-            ul.appendChild(nameHero);
+            // let dataName = template.dataset.dataHeroName;
+            // dataName = hero.name;
+            // dataName.innerText = hero.name;
+            // document.importNode(template.querySelector("[data-hero-name]")().innerText = 
+            
+            const templateContent = document.importNode(template.content, true);
+            templateContent.querySelector('.js-name').textContent = hero.name;
+            ul.appendChild(templateContent);
+            console.log(ul, templateContent);
         });
         // return getChallengers(allHeroes);
-        
+
     }
 
     catch (error) {
-        console.log("truc");
+        console.error("truc", error);
     }
 
 }
