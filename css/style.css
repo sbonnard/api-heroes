@@ -5,5 +5,11 @@
     background-color: cornflowerblue;
     width: fit-content;
     height: fit-content;
+}
+
+.hero__selection {
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+
 }
