@@ -31,23 +31,29 @@ async function waitingForResponse() {
         console.log(getChallengers(allHeroes));
 
         getChallengers(allHeroes).forEach(hero => {
-            // let dataName = template.dataset.dataHeroName;
-            // dataName = hero.name;
-            // dataName.innerText = hero.name;
-            // document.importNode(template.querySelector("[data-hero-name]")().innerText = 
 
+            const arrayChallengers = [];
+
+            //contente of the template 
             const templateContent = document.importNode(template.content, true);
+
             templateContent.querySelector('.js-img').src = hero.images.sm;
 
             templateContent.querySelector('.js-name').textContent = hero.name;
             
             templateContent.querySelector('.js-pv').textContent = hero.powerstats.durability;
+
             templateContent.querySelector('.js-strength').textContent = hero.powerstats.strength;
+
             templateContent.querySelector('.js-defense').textContent = hero.powerstats.combat;
 
-
             ul.appendChild(templateContent);
-            console.log(ul, templateContent);
+
+            //button to select characters
+            const choiceBtn = document.querySelector(".js-btn");
+            choiceBtn.addEventListener("click", function(event) {
+                
+            })
         });
         // return getChallengers(allHeroes);
 
