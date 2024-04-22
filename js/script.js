@@ -18,6 +18,42 @@ function getRandomArrayValue(array) {
     return array[getRandomValue(array.length - 1)];
 }
 
+
+const ul = document.getElementById("heros-lst");
+
+async function waitingForResponse () {
+    try {
+
+        const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json");
+    
+        const allHeroes = await response.json()
+        console.log(getChallengers(allHeroes));
+
+        getChallengers(allHeroes).forEach(hero => {
+            const nameHero = document.createElement('li');
+            nameHero.innerHTML = hero.name;
+            ul.appendChild(nameHero);
+        });
+        // return getChallengers(allHeroes);
+        
+    }
+
+    catch (error) {
+        console.log("truc");
+    }
+
+}
+
+console.log(waitingForResponse());
+
+// const allHeroes = fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json")
+// .then(response => response.json())
+// .then(json => console.log(json));
+
+// console.log(allHeroes);
+// console.log(getRandomArrayValue(allHeroes));
+
+
 let characters = [
     {
         name: 'Chun-li',
@@ -74,7 +110,7 @@ function getDefenseScore(defender) {
  */
 function getChallengers(charactersList) {
     let challengers = [];
-    while (challengers.length < 2) {
+    while (challengers.length < 10) {
         const c = getRandomArrayValue(charactersList);
         if (!challengers.includes(c)) {
             challengers.push(c);
@@ -83,6 +119,7 @@ function getChallengers(charactersList) {
     return challengers;
 }
 
+// console.log(getChallengers(allHeroes));
 
 /**
  * fight between two characters and define the winner and the loser.
@@ -166,5 +203,5 @@ function startBattleRoyalInterval(characterArray) {
     }, 1000);
 }
 
-startBattleRoyalInterval(characters);
+// startBattleRoyalInterval(characters);
 // console.table(startBattleRoyalInterval(characters));
