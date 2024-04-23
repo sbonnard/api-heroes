@@ -135,6 +135,8 @@ function startBattleRoyalInterval(characterArray) {
     }, 1000);
 }
 
+const ulChallengers = document.getElementById("selected-challengers");
+
 /**
  * Select and push a character in current challenger's array.
  * @param {element} allBtn Every button from the Hero template.
@@ -175,5 +177,6 @@ export default {
     isAlive,
     burnTheDead,
     startBattleRoyalInterval,
-    getHero
+    getHero,
+    ulChallengers
 }

@@ -59,6 +59,7 @@ async function waitingForResponse() {
     }
 
 }
+
 /**
  * Select and push a character in current challenger's array.
  * @param {element} allBtn Every button from the Hero template.
@@ -73,18 +74,19 @@ async function getHero(allBtn) {
                 ul.appendChild(cardHero)
             } else {
                 console.log(cardHero);
-                btn.dataset.selected = "selected";    
+                btn.dataset.selected = "selected";
                 const idData = cardHero.dataset.id
                 console.log(idData);
-    
+
                 ulChallengers.appendChild(cardHero)
-    
+
                 btn.textContent = "Retirer le Héros";
             }
         })
     }
 
 }
+
 console.log(getHero());
 console.log(waitingForResponse());
 
