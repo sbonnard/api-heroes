@@ -56,18 +56,26 @@ async function waitingForResponse() {
 }
 
 async function getHero (allBtn) {
-    const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/id/.json");
+    // const response = await fetch(`https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/id/550.json`);
+    
+    // const firstChall = await response.json() 
 
+    // log(firstChall)
     for(const btn of allBtn) {
         console.log(btn);
         btn.addEventListener("click", function(event) {
-            const idHero = btn.closest(".js-hero")
-            console.log(idHero);
+            const cardHero = btn.closest(".js-hero")
+            console.log(cardHero);
+
+            const idData = cardHero.dataset.id
+            console.log(idData);
+
+            ulChallengers.appendChild(cardHero)
             // console.log(event.target.dataset.btnId);
             // if(event.target.dataset.btnId === ul.dataId) 
         })
     }
-    
+        
 }
 console.log(getHero());
 console.log(waitingForResponse());
