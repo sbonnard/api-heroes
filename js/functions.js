@@ -135,27 +135,28 @@ function startBattleRoyalInterval(characterArray) {
     }, 1000);
 }
 
-const ulChallengers = document.getElementById("selected-challengers");
 
 /**
  * Select and push a character in current challenger's array.
  * @param {element} allBtn Every button from the Hero template.
+ * @param {element} element1 Selected characters ul.
+ * @param {element} element2 Chose your character ul.
  */
-async function getHero(allBtn) {
-
+async function getHero(allBtn, element1, element2) {
+console.log(allBtn);
     for (const btn of allBtn) {
         console.log(btn);
         const cardHero = btn.closest(".js-hero")
         btn.addEventListener("click", function (event) {
             if (btn.dataset.selected === "selected") {
-                ul.appendChild(cardHero)
+                element1.appendChild(cardHero)
             } else {
                 console.log(cardHero);
                 btn.dataset.selected = "selected";
                 const idData = cardHero.dataset.id
                 console.log(idData);
 
-                ulChallengers.appendChild(cardHero)
+                element2.appendChild(cardHero)
 
                 btn.textContent = "Retirer le Héros";
             }
@@ -177,6 +178,5 @@ export default {
     isAlive,
     burnTheDead,
     startBattleRoyalInterval,
-    getHero,
-    ulChallengers
+    getHero
 }
