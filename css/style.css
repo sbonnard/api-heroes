@@ -34,10 +34,19 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: pink;
+    background-color: #A72E47;
+    color: white;
     border-radius: 5%;
     padding: 1rem;
     width: calc(100% / 3);
+}
+
+.hero__name {
+    text-transform: uppercase;
+}
+
+.hero__stats {
+    font-weight: bold;
 }
 
 .hero__selection {
