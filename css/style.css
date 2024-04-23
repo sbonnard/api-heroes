@@ -25,6 +25,10 @@ button {
     cursor: pointer;
 }
 
+.btn {
+    width: 8rem;
+}
+
 
 .hero{
     display: flex;
