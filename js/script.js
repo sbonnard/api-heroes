@@ -77,7 +77,7 @@ async function getHero (allBtn) {
     }
         
 }
-console.log(getHero());
+// console.log(getHero());
 console.log(waitingForResponse());
 
 // const allHeroes = fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json")
