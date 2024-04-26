@@ -1,84 +1,70 @@
-import  Heroes from "./functions.js"
+
+import Heroes from "./functions.js"
 
 const ulChallengers = document.getElementById("selected-challengers");
 const ul = document.getElementById("heroes-lst");
 const template = document.getElementById('hero-template');
 let templateContent;
 
+
+
+/**
+ * The function containing API datas. It creates a template and draws 10 random characters from the API.
+*/
 async function waitingForResponse() {
     try {
         
         const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json");
-        
+
         const allHeroes = await response.json()
-        // console.log(Heroes.getChallengers(allHeroes));
         const arrayChallengers = [];
         const selectedChallengers = [];
         const btnArray = [];
         Heroes.getChallengers(allHeroes).forEach(hero => {
             
             
-            //contente of the template 
+            //content of the template 
             templateContent = document.importNode(template.content, true);
-
+            
             templateContent.querySelector("[data-id]").setAttribute("data-id", hero.id);
             
-            templateContent.querySelector("[data-btn-id]").setAttribute("data-btn-id", hero.id) 
- 
+            templateContent.querySelector("[data-btn-id]").setAttribute("data-btn-id", hero.id)
+            
             templateContent.querySelector('.js-img').src = hero.images.sm;
-
+            
             templateContent.querySelector('.js-name').textContent = hero.name;
             
             templateContent.querySelector('.js-pv').textContent = hero.powerstats.durability;
-
+            
             templateContent.querySelector('.js-strength').textContent = hero.powerstats.strength;
-
+            
             templateContent.querySelector('.js-defense').textContent = hero.powerstats.combat;
-
-            arrayChallengers.push(hero)
-
+            
             ul.appendChild(templateContent);
-
+            
+            arrayChallengers.push(hero)
+            
             console.log(ul);
-
+            
+            
             
             // console.log(document.querySelector("[data-id]"));
         });
         
         const allBtn = document.querySelectorAll(".js-btn");
-        getHero(allBtn)
+        Heroes.getHero(allBtn, ul, ulChallengers);
     }
-
+    
     catch (error) {
         console.error("truc", error);
     }
-
-}
-
-async function getHero (allBtn) {
-    // const response = await fetch(`https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/id/550.json`);
     
-    // const firstChall = await response.json() 
-
-    // log(firstChall)
-    for(const btn of allBtn) {
-        console.log(btn);
-        btn.addEventListener("click", function(event) {
-            const cardHero = btn.closest(".js-hero")
-            console.log(cardHero);
-
-            const idData = cardHero.dataset.id
-            console.log(idData);
-
-            ulChallengers.appendChild(cardHero)
-            // console.log(event.target.dataset.btnId);
-            // if(event.target.dataset.btnId === ul.dataId) 
-        })
-    }
-        
 }
-// console.log(getHero());
 console.log(waitingForResponse());
+
+const removeButtons = document.querySelectorAll('#ulChallengers .js-button');
+console.log(removeButtons);
+
 
 // const allHeroes = fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json")
 // .then(response => response.json())
@@ -118,6 +104,3 @@ console.log(waitingForResponse());
 //         shield: 2
 //     }
 // ];
-
-
-

@@ -15,7 +15,7 @@
     <main>
         <section>
             <h2>Personnages sélectionnés</h2>
-            <ul id="selected-challengers">
+            <ul id="selected-challengers" class="hero__selection">
 
             </ul>
         </section>
@@ -32,14 +32,14 @@
 
     <template id="hero-template">
         <li class="hero js-hero" data-id="">
-            <h2 class="js-name">José</h2>
+            <h2 class="js-name hero__name">José</h2>
             <img class="js-img" src="img/1-a-bomb.jpg" alt="">
             <ul>
-                <li>PV : <span class="js-pv">2</span></li>
-                <li>Force : <span class="js-strength">25</span></li>
-                <li>Défense : <span class="js-defense">5</span></li>
+                <li>PV : <span class="hero__stats js-pv">2</span></li>
+                <li>Force : <span class="hero__stats js-strength">25</span></li>
+                <li>Défense : <span class="hero__stats js-defense">5</span></li>
             </ul>
-            <button data-btn-id="" class="js-btn">Choisis-moi !</button>
+            <button data-btn-id="" class="btn js-btn">Choisis-moi !</button>
         </li>
     </template>
 
