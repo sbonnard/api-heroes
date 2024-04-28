@@ -11,17 +11,28 @@ let templateContent;
 /**
  * The function containing API datas. It creates a template and draws 10 random characters from the API.
 */
-async function waitingForResponse() {
+async function loadChallengers() {
     try {
         
         const response = await fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json");
+        return await response.json();
+    }
+    
+    catch (error) {
+        console.error("truc", error);
+    }
+    
+}
 
-        const allHeroes = await response.json()
+/**
+ * Create the template of a challenger.
+ */
+async function createChallenger() {
+    try {
+        
+        const allHeroes = await loadChallengers();
         const arrayChallengers = [];
-        const selectedChallengers = [];
-        const btnArray = [];
         Heroes.getChallengers(allHeroes).forEach(hero => {
-            
             
             //content of the template 
             templateContent = document.importNode(template.content, true);
@@ -45,10 +56,6 @@ async function waitingForResponse() {
             arrayChallengers.push(hero)
             
             console.log(ul);
-            
-            
-            
-            // console.log(document.querySelector("[data-id]"));
         });
         
         const allBtn = document.querySelectorAll(".js-btn");
@@ -60,47 +67,8 @@ async function waitingForResponse() {
     }
     
 }
-console.log(waitingForResponse());
+
+createChallenger();
 
 const removeButtons = document.querySelectorAll('#ulChallengers .js-button');
 console.log(removeButtons);
-
-
-// const allHeroes = fetch("https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json")
-// .then(response => response.json())
-// .then(json => console.log(json));
-
-// console.log(allHeroes);
-// console.log(getRandomArrayValue(allHeroes));
-
-
-// let characters = [
-//     {
-//         name: 'Chun-li',
-//         life: 50,
-//         xp: 9,
-//         weapon: 9,
-//         shield: 4
-//     },
-//     {
-//         name: 'Ryu',
-//         life: 50,
-//         xp: 7,
-//         weapon: 8,
-//         shield: 7
-//     },
-//     {
-//         name: 'Ken',
-//         life: 50,
-//         xp: 7,
-//         weapon: 7,
-//         shield: 7
-//     },
-//     {
-//         name: 'Zangief',
-//         life: 50,
-//         xp: 5,
-//         weapon: 5,
-//         shield: 2
-//     }
-// ];
